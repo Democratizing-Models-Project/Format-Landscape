@@ -1,0 +1,41 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Format Landscape"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: serialization-formats.qmd
+        text: Serialization Formats
+      - text: Physics Domains
+        menu:
+          - href: lattice-physics.qmd
+            text: Lattice Physics
+          - href: hadron-physics.qmd
+            text: Hadron Physics
+          - href: nuclear-physics.qmd
+            text: Nuclear Physics
+          - href: astro-physics.qmd
+            text: Astro Physics
+          - href: laser-physics.qmd
+            text: Laser Physics
+          - href: particle-physics.qmd
+            text: Particle Physics
+          - href: neutrino-physics.qmd
+            text: Neutrino Physics
+  sidebar: false
+  page-footer:
+    left: "Format Landscape - A collection of serialization formats and DSLs for physics"
+    right: "Built with Quarto"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    code-overflow: wrap

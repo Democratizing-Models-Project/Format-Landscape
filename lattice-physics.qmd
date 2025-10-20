@@ -1,0 +1,145 @@
+---
+title: "Lattice Physics Formats"
+---
+
+# Lattice Physics: Formats and DSLs
+
+Lattice physics, particularly lattice QCD (Quantum Chromodynamics), involves discretizing space-time on a lattice for numerical simulations. This domain has developed specialized formats for gauge configurations, propagators, and analysis results.
+
+## Data Formats
+
+### ILDG (International Lattice Data Grid) Format
+- **Website**: [https://www.usqcd.org/ildg/](https://www.usqcd.org/ildg/)
+- **Description**: Standard format for storing lattice QCD gauge configurations
+- **Format Type**: Binary (often based on LIME)
+- **Use Cases**: Exchange of gauge configurations between collaborations
+- **Key Features**:
+  - Metadata standards for lattice parameters
+  - Checksum verification
+  - Platform-independent binary format
+
+### LIME (Lattice QCD Interchange Message Encapsulation)
+- **Repository**: [https://github.com/usqcd-software/lime](https://github.com/usqcd-software/lime)
+- **Description**: Message passing protocol for lattice QCD
+- **Format Type**: Binary with structured records
+- **Use Cases**: Wrapping gauge configurations and propagators
+- **Key Features**:
+  - Self-describing binary format
+  - Support for large files
+  - Metadata embedding
+
+### QDP/C and QDP++ Formats
+- **QDP/C**: [https://usqcd-software.github.io/qdpxx/](https://usqcd-software.github.io/qdpxx/)
+- **Description**: Level 3 data-parallel API for lattice QCD
+- **Use Cases**: Portable lattice QCD code
+- **I/O**: Typically uses LIME or custom binary formats
+
+### SciDAC QIO (QCD I/O)
+- **Repository**: Part of SciDAC software suite
+- **Description**: Parallel I/O library for lattice QCD
+- **Format Type**: Binary, supports LIME
+- **Key Features**:
+  - Parallel file I/O
+  - Checkpointing support
+  - Checksums and metadata
+
+## Software Frameworks and DSLs
+
+### Chroma
+- **Website**: [https://jeffersonlab.github.io/chroma/](https://jeffersonlab.github.io/chroma/)
+- **Description**: Lattice QCD application built on QDP++
+- **Input Format**: XML configuration files
+- **Data Format**: Uses QIO/LIME for gauge configurations
+- **DSL**: XML-based parameter specification
+
+### Grid
+- **Repository**: [https://github.com/paboyle/Grid](https://github.com/paboyle/Grid)
+- **Description**: Data parallel C++ library for lattice field theory
+- **Input Format**: XML, JSON, or command-line parameters
+- **Data Format**: Custom binary formats, HDF5 support
+- **Key Features**: Performance-portable across different architectures
+
+### tmLQCD
+- **Repository**: [https://github.com/etmc/tmLQCD](https://github.com/etmc/tmLQCD)
+- **Description**: Twisted mass lattice QCD simulation suite
+- **Input Format**: Custom parameter files
+- **Data Format**: LIME format for configurations
+
+### HiRep
+- **Repository**: [https://github.com/claudiopica/HiRep](https://github.com/claudiopica/HiRep)
+- **Description**: Lattice gauge theory simulations with higher representations
+- **Input Format**: Custom input files
+- **Data Format**: Custom binary format
+
+## Analysis Tools and Formats
+
+### HDF5 for Lattice Data
+- Many modern lattice QCD projects are adopting HDF5 for:
+  - Correlator data
+  - Analysis results
+  - Ensemble metadata
+- **Advantages**: Self-describing, hierarchical, widely supported
+
+### LatAnalyze
+- **Repository**: [https://github.com/aportelli/LatAnalyze](https://github.com/aportelli/LatAnalyze)
+- **Description**: C++ library for lattice QCD data analysis
+- **Input Formats**: ASCII, HDF5, XML
+- **Output Formats**: HDF5, ASCII, plots
+
+### hadron
+- **Repository**: [https://github.com/HISKP-LQCD/hadron](https://github.com/HISKP-LQCD/hadron)
+- **Description**: R package for lattice QCD analysis
+- **Input Formats**: Custom binary, ASCII
+- **Use Cases**: Statistical analysis of correlation functions
+
+## Configuration Metadata Standards
+
+### Ensemble Metadata
+Key metadata typically stored with lattice configurations:
+- Lattice dimensions (Nt, Nx, Ny, Nz)
+- Gauge action parameters (β, c_sw, etc.)
+- Fermion action parameters (κ, masses, etc.)
+- Trajectory number
+- Plaquette values
+- Polyakov loops
+- Checksums
+
+### Naming Conventions
+- Different collaborations use different naming schemes
+- ILDG promotes standardized metadata
+- Typically includes: action, volume, parameters, trajectory
+
+## Domain-Specific Languages
+
+### QDP Expression Templates
+- C++ expression templates for lattice operations
+- Provides domain-specific notation for lattice field operations
+- Example: `u[mu] * psi` for gauge field times fermion field
+
+### Chroma XML
+- Declarative specification of:
+  - Propagator calculations
+  - Measurement programs
+  - Analysis workflows
+- Allows complex calculations to be specified without coding
+
+## Best Practices
+
+1. **Use ILDG/LIME** for gauge configuration exchange
+2. **Store metadata** comprehensively with all configurations
+3. **Verify checksums** after file transfers
+4. **Document ensemble parameters** thoroughly
+5. **Use HDF5** for analysis data and correlators
+6. **Archive configurations** with full provenance information
+
+## Related Resources
+
+- [Serialization Formats Overview](serialization-formats.qmd)
+- [Particle Physics Formats](particle-physics.qmd)
+- [Nuclear Physics Formats](nuclear-physics.qmd)
+
+## External Links
+
+- [USQCD Software](https://www.usqcd.org/software.html)
+- [ILDG Working Group](https://www.usqcd.org/ildg/)
+- [SciDAC Software](https://www.usqcd.org/scidac.html)

@@ -1,0 +1,121 @@
+---
+title: "Serialization Formats"
+---
+
+# Common Serialization Formats in Physics
+
+This page provides an overview of widely-used serialization formats in physics research and scientific computing.
+
+## Binary Formats
+
+### HDF5 (Hierarchical Data Format 5)
+- **Website**: [https://www.hdfgroup.org/solutions/hdf5/](https://www.hdfgroup.org/solutions/hdf5/)
+- **Description**: A versatile data model, library, and file format for storing and managing data
+- **Use Cases**: Large-scale numerical simulations, experimental data storage
+- **Language Support**: C, C++, Fortran, Python, Java, MATLAB, Julia
+- **Physics Applications**: Climate modeling, particle physics, astrophysics
+
+### ROOT
+- **Website**: [https://root.cern.ch/](https://root.cern.ch/)
+- **Description**: A data analysis framework developed at CERN
+- **Use Cases**: High-energy physics data analysis and storage
+- **Language Support**: C++, Python (PyROOT)
+- **Physics Applications**: Particle physics experiments (LHC, Belle II, etc.)
+
+### NetCDF (Network Common Data Form)
+- **Website**: [https://www.unidata.ucar.edu/software/netcdf/](https://www.unidata.ucar.edu/software/netcdf/)
+- **Description**: A set of libraries and machine-independent data formats
+- **Use Cases**: Array-oriented scientific data
+- **Language Support**: C, Fortran, Python, Java, MATLAB
+- **Physics Applications**: Climate science, oceanography, atmospheric physics
+
+### FITS (Flexible Image Transport System)
+- **Website**: [https://fits.gsfc.nasa.gov/](https://fits.gsfc.nasa.gov/)
+- **Description**: Open standard for astronomical data
+- **Use Cases**: Astronomical images and tables
+- **Language Support**: C, Fortran, Python (astropy), IDL
+- **Physics Applications**: Astronomy, astrophysics
+
+## Text-Based Formats
+
+### JSON (JavaScript Object Notation)
+- **Website**: [https://www.json.org/](https://www.json.org/)
+- **Description**: Lightweight data-interchange format
+- **Use Cases**: Configuration files, lightweight data exchange
+- **Language Support**: Nearly all programming languages
+- **Physics Applications**: Configuration management, metadata storage
+
+### XML (eXtensible Markup Language)
+- **Website**: [https://www.w3.org/XML/](https://www.w3.org/XML/)
+- **Description**: Markup language for encoding documents
+- **Use Cases**: Complex hierarchical data, metadata
+- **Language Support**: Nearly all programming languages
+- **Physics Applications**: Experiment metadata, detector descriptions (GDML)
+
+### YAML (YAML Ain't Markup Language)
+- **Website**: [https://yaml.org/](https://yaml.org/)
+- **Description**: Human-friendly data serialization standard
+- **Use Cases**: Configuration files, parameter files
+- **Language Support**: Most modern programming languages
+- **Physics Applications**: Simulation parameters, workflow configurations
+
+### CSV (Comma-Separated Values)
+- **Description**: Simple tabular data format
+- **Use Cases**: Simple data tables, spreadsheet data
+- **Language Support**: Universal support
+- **Physics Applications**: Small datasets, experimental measurements
+
+## Specialized Physics Formats
+
+### GDML (Geometry Description Markup Language)
+- **Website**: [https://gdml.web.cern.ch/GDML/](https://gdml.web.cern.ch/GDML/)
+- **Description**: XML-based geometry description for particle physics detectors
+- **Use Cases**: Detector geometry in Geant4 simulations
+- **Physics Applications**: Detector simulation, particle physics
+
+### SLHA (SUSY Les Houches Accord)
+- **Description**: Standard format for supersymmetry parameters
+- **Use Cases**: Exchange of SUSY model parameters between tools
+- **Physics Applications**: Beyond Standard Model physics
+
+### LHE (Les Houches Event format)
+- **Description**: Standard format for particle physics event generators
+- **Use Cases**: Monte Carlo event generation
+- **Physics Applications**: High-energy physics simulations
+
+## Protocol Buffers and Modern Formats
+
+### Protocol Buffers
+- **Website**: [https://protobuf.dev/](https://protobuf.dev/)
+- **Description**: Google's language-neutral, platform-neutral extensible mechanism for serializing structured data
+- **Language Support**: C++, Java, Python, Go, and more
+- **Physics Applications**: High-performance data exchange
+
+### Apache Parquet
+- **Website**: [https://parquet.apache.org/](https://parquet.apache.org/)
+- **Description**: Columnar storage format for Hadoop ecosystem
+- **Use Cases**: Big data analytics
+- **Physics Applications**: Large-scale data analysis pipelines
+
+### MessagePack
+- **Website**: [https://msgpack.org/](https://msgpack.org/)
+- **Description**: Efficient binary serialization format
+- **Use Cases**: High-performance data exchange
+- **Language Support**: 50+ programming languages
+
+## Choosing a Format
+
+When selecting a serialization format for your physics project, consider:
+
+1. **Data Size**: Binary formats (HDF5, ROOT) for large datasets; text formats (JSON, YAML) for small configs
+2. **Performance**: Binary formats are generally faster for I/O operations
+3. **Human Readability**: Text formats are easier to inspect and debug
+4. **Tool Support**: Consider the tools and languages in your workflow
+5. **Community Standards**: Use established formats in your field (e.g., ROOT in HEP, FITS in astronomy)
+6. **Longevity**: Choose formats with good long-term support and documentation
+
+## Related Resources
+
+- [Lattice Physics Formats](lattice-physics.qmd)
+- [Particle Physics Formats](particle-physics.qmd)
+- [Astro Physics Formats](astro-physics.qmd)

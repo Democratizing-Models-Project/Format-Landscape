@@ -1,0 +1,42 @@
+---
+title: "Format Landscape"
+---
+
+# Welcome to Format Landscape
+
+This repository gathers links and resources on **serialization formats** and **domain-specific languages (DSLs)** used across various physics domains.
+
+## Overview
+
+Modern physics research relies heavily on data exchange and communication between different software tools, simulations, and experiments. Understanding the landscape of serialization formats and domain-specific languages is crucial for:
+
+- **Data interoperability** between different tools and frameworks
+- **Efficient data storage** and transmission
+- **Reproducibility** of scientific results
+- **Collaboration** across different research groups
+
+## Physics Domains Covered
+
+This collection organizes formats and DSLs by physics domain:
+
+- [**Lattice Physics**](lattice-physics.qmd) - Formats for lattice QCD and related simulations
+- [**Hadron Physics**](hadron-physics.qmd) - Formats for hadron structure and interactions
+- [**Nuclear Physics**](nuclear-physics.qmd) - Formats for nuclear structure and reactions
+- [**Astro Physics**](astro-physics.qmd) - Formats for astrophysics and cosmology
+- [**Laser Physics**](laser-physics.qmd) - Formats for laser-plasma interactions
+- [**Particle Physics**](particle-physics.qmd) - Formats for high-energy particle physics
+- [**Neutrino Physics**](neutrino-physics.qmd) - Formats for neutrino experiments
+
+## General Resources
+
+For a comprehensive overview of common serialization formats used across domains, see:
+
+- [**Serialization Formats**](serialization-formats.qmd) - Common data formats (HDF5, ROOT, JSON, XML, etc.)
+
+## Contributing
+
+This is an evolving collection. Contributions are welcome! Please submit issues or pull requests to add new formats, correct information, or suggest improvements.
+
+## About
+
+This project is part of the Democratizing Models Project, aimed at making scientific software and data more accessible and interoperable.
