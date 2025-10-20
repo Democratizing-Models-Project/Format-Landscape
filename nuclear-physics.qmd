@@ -1,0 +1,219 @@
+---
+title: "Nuclear Physics Formats"
+---
+
+# Nuclear Physics: Formats and DSLs
+
+Nuclear physics involves the study of atomic nuclei, nuclear reactions, and nuclear structure. This field uses specialized formats for experimental data, theoretical calculations, and nuclear data evaluation.
+
+## Nuclear Data Formats
+
+### ENDF (Evaluated Nuclear Data File)
+- **Website**: [https://www.nndc.bnl.gov/endf/](https://www.nndc.bnl.gov/endf/)
+- **Description**: International standard for evaluated nuclear reaction data
+- **Format**: Structured ASCII (ENDF-6 format)
+- **Use Cases**: 
+  - Cross sections
+  - Angular distributions
+  - Energy spectra
+  - Decay data
+- **Key Features**: 
+  - Material-temperature (MT) numbers
+  - Reaction channel identification
+  - Error/covariance data
+
+### ACE (A Compact ENDF) Format
+- **Description**: Binary format used by MCNP and other Monte Carlo codes
+- **Source**: Processed from ENDF
+- **Use Cases**: Fast neutron transport calculations
+- **Tools**: NJOY for ENDF to ACE conversion
+
+### EXFOR (Experimental Nuclear Reaction Data)
+- **Website**: [https://www-nds.iaea.org/exfor/](https://www-nds.iaea.org/exfor/)
+- **Description**: Database of experimental nuclear reaction data
+- **Format**: Structured text format (EXFOR syntax)
+- **Contents**: 
+  - Experimental measurements
+  - Cross sections
+  - Bibliographic information
+  - Experimental details
+
+### ENSDF (Evaluated Nuclear Structure Data File)
+- **Website**: [https://www.nndc.bnl.gov/ensdf/](https://www.nndc.bnl.gov/ensdf/)
+- **Description**: Database of nuclear structure and decay data
+- **Format**: Structured ASCII
+- **Contents**:
+  - Energy levels
+  - Gamma rays
+  - Decay schemes
+  - Half-lives
+
+## Monte Carlo Transport Codes
+
+### MCNP (Monte Carlo N-Particle)
+- **Website**: [https://mcnp.lanl.gov/](https://mcnp.lanl.gov/)
+- **Input Format**: Custom text-based DSL
+- **Data Libraries**: ACE format
+- **Output**: Binary and ASCII tallies
+- **DSL Features**:
+  - Cell/surface geometry description
+  - Material specifications
+  - Source definitions
+  - Tally specifications
+
+### Geant4 (Geometry And Tracking)
+- **Website**: [https://geant4.web.cern.ch/](https://geant4.web.cern.ch/)
+- **Input**: 
+  - GDML (XML geometry)
+  - Macro files (custom command language)
+- **Data Libraries**: G4EMLOW, PhotonEvaporation, etc.
+- **Output**: ROOT, HDF5, ASCII
+
+### FLUKA
+- **Website**: [https://fluka.cern/](https://fluka.cern/)
+- **Input Format**: Custom card-based input
+- **Data Libraries**: Internal nuclear data
+- **Output**: Binary and ASCII
+
+### PHITS (Particle and Heavy Ion Transport code System)
+- **Website**: [https://phits.jaea.go.jp/](https://phits.jaea.go.jp/)
+- **Input Format**: Card-based input similar to MCNP
+- **Output**: Various formats including ROOT
+
+## Nuclear Structure Codes
+
+### NuShellX
+- **Description**: Shell model calculations
+- **Input Format**: Custom interaction files
+- **Output**: ASCII energy levels, transitions
+- **Interaction Files**: USD, GXPF1, KB3G, etc.
+
+### OXBASH
+- **Description**: Shell model code
+- **Input Format**: Custom format for interactions and model spaces
+- **Output**: ASCII tables of states and transitions
+
+### TALYS
+- **Website**: [https://tendl.web.psi.ch/tendl_2021/talys.html](https://tendl.web.psi.ch/tendl_2021/talys.html)
+- **Description**: Nuclear reaction simulation code
+- **Input Format**: Keyword-based input files
+- **Output**: ASCII tables, can generate ENDF format
+
+## Experimental Data Acquisition
+
+### MIDAS (Maximum Integrated Data Acquisition System)
+- **Website**: [https://midas.triumf.ca/](https://midas.triumf.ca/)
+- **Description**: Data acquisition system used in many nuclear physics labs
+- **Format**: Custom binary event format
+- **Output**: Can export to ROOT
+- **Features**: Online analysis, slow control integration
+
+### NSCLDAQ (National Superconducting Cyclotron Laboratory DAQ)
+- **Description**: Data acquisition framework
+- **Format**: Ring buffer based event format
+- **Use Cases**: Rare isotope beam experiments
+
+### ROOT-based DAQ
+- Many experiments use ROOT for data storage
+- Event structures defined with ROOT dictionaries
+- Enables immediate analysis
+
+## Gamma-Ray Spectroscopy
+
+### Radware
+- **Description**: Gamma-ray spectroscopy analysis package
+- **Formats**: 
+  - .spe (spectrum files)
+  - .mat (matrix files)
+  - .lev (level scheme files)
+- **Tools**: gf3, levit8r, escl8r
+
+### GammaVision / Genie
+- Commercial gamma spectroscopy software
+- Proprietary formats with some export options
+- ASCII export for spectra
+
+### SPE Files
+- Simple ASCII or binary format for gamma spectra
+- Header with calibration info
+- Channel counts
+
+## Nuclear Reaction Theory
+
+### Coupled-Channels Codes
+- **FRESCO**: [https://www.fresco.org.uk/](https://www.fresco.org.uk/)
+  - Input: Custom namelist format
+  - Output: Cross sections, analyzing powers
+- **ECIS**: Coupled-channels code
+  - Custom input format
+
+### R-Matrix Codes
+- **AZURE2**: [https://azure.nd.edu/](https://azure.nd.edu/)
+  - Input: XML configuration
+  - Data: ASCII tables
+- EDA (R-Matrix code)
+  - Custom input format
+
+## Data Processing Libraries
+
+### NJOY
+- **Website**: [https://www.njoy21.io/](https://www.njoy21.io/)
+- **Description**: Process ENDF data into usable formats
+- **Input**: ENDF-6 format
+- **Output**: ACE, MATXS, ACER, etc.
+- **DSL**: Card-based input for processing instructions
+
+### PREPRO
+- **Description**: ENDF preprocessing utilities
+- **Use Cases**: Format checking, unit conversion, plotting
+
+### FUDGE (For Updating Data and Generating ENDF)
+- **Repository**: [https://github.com/LLNL/fudge](https://github.com/LLNL/fudge)
+- **Description**: Python package for nuclear data processing
+- **Input/Output**: ENDF, GNDS (next-gen format)
+
+## Next-Generation Formats
+
+### GNDS (Generalized Nuclear Data Structure)
+- **Description**: XML-based successor to ENDF
+- **Features**:
+  - More flexible than ENDF
+  - Better uncertainty quantification
+  - Hierarchical structure
+- **Status**: Under development, some adoption
+
+## Domain-Specific Languages
+
+### MCNP Input Language
+- Geometry: Cell and surface definitions
+- Materials: Material cards with isotope fractions
+- Source: Complex source specifications
+- Tallies: Particle and energy filters
+
+### ENDF Format Language
+- Structured records with MT/MF numbers
+- Tabulated data with interpolation schemes
+- Covariance matrices
+
+## Best Practices
+
+1. **Use ENDF** for evaluated nuclear data
+2. **Archive in EXFOR** for experimental data
+3. **Document geometries** thoroughly (especially for simulations)
+4. **Validate** against benchmarks
+5. **Version control** nuclear data libraries
+6. **Use standard formats** for data exchange
+7. **Preserve raw data** from experiments
+
+## Related Resources
+
+- [Particle Physics Formats](particle-physics.qmd)
+- [Hadron Physics Formats](hadron-physics.qmd)
+- [Serialization Formats Overview](serialization-formats.qmd)
+
+## External Links
+
+- [NNDC (National Nuclear Data Center)](https://www.nndc.bnl.gov/)
+- [IAEA Nuclear Data Services](https://www-nds.iaea.org/)
+- [NEA Data Bank](https://www.oecd-nea.org/jcms/pl_19666/nuclear-data)
+- [TENDL (TALYS-based Evaluated Nuclear Data Library)](https://tendl.web.psi.ch/)

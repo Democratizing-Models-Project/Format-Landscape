@@ -1,0 +1,306 @@
+---
+title: "Particle Physics Formats"
+---
+
+# Particle Physics: Formats and DSLs
+
+High-energy particle physics (HEP) has developed a rich ecosystem of data formats and domain-specific languages for experimental data, simulations, and theoretical calculations.
+
+## Experimental Data Formats
+
+### ROOT
+- **Website**: [https://root.cern.ch/](https://root.cern.ch/)
+- **Description**: The de facto standard for HEP data analysis
+- **Format**: Binary with self-describing schemas
+- **Key Features**:
+  - TTrees for event data
+  - Histograms and statistical tools
+  - I/O compression
+  - C++ and Python interfaces
+- **Use Cases**: 
+  - LHC experiments (ATLAS, CMS, LHCb, ALICE)
+  - Belle II, BaBar
+  - Most modern HEP experiments
+
+### EDM4hep (Event Data Model for HEP)
+- **Repository**: [https://github.com/key4hep/EDM4hep](https://github.com/key4hep/EDM4hep)
+- **Description**: Common event data model for future colliders
+- **Format**: Based on PODIO
+- **Use Cases**: FCC, CEPC, ILC, CLIC studies
+- **Key Features**: Generator-based C++ code, ROOT I/O
+
+### PODIO (Plain Old Data I/O)
+- **Repository**: [https://github.com/AIDASoft/podio](https://github.com/AIDASoft/podio)
+- **Description**: Event data model toolkit
+- **Backend**: ROOT, SIO (Simple I/O)
+- **Features**: 
+  - Schema definition in YAML
+  - Code generation for C++
+  - Relations between objects
+
+### LCIO (Linear Collider I/O)
+- **Website**: [https://lcio.desy.de/](https://lcio.desy.de/)
+- **Description**: Event data model for linear collider studies
+- **Format**: Custom binary or ROOT
+- **Language Support**: C++, Java, Python, Fortran
+- **Use Cases**: ILC detector studies
+
+## Monte Carlo Event Generators
+
+### HepMC (High Energy Physics Monte Carlo)
+- **Website**: [http://hepmc.web.cern.ch/](http://hepmc.web.cern.ch/)
+- **Description**: Standard event record for MC generators
+- **Version**: HepMC3 is current
+- **Format**: 
+  - In-memory C++ objects
+  - ASCII I/O
+  - ROOT I/O
+- **Supported by**: PYTHIA, Herwig, Sherpa, MadGraph, etc.
+
+### Les Houches Event Format (LHEF)
+- **Description**: XML-based format for hard process events
+- **Use Cases**: 
+  - Matrix element generators → Parton shower
+  - Interfacing different generator components
+- **Standard**: Les Houches Accord
+- **Version**: LHEF 3.0 current
+
+### PYTHIA
+- **Website**: [https://www.pythia.org/](https://www.pythia.org/)
+- **Description**: General-purpose event generator
+- **Input**: Command-based configuration
+- **Output**: HepMC, LHEF, custom formats
+- **Configuration**: Key-value pairs or XML
+
+### Herwig
+- **Website**: [https://herwig.hepforge.org/](https://herwig.hepforge.org/)
+- **Input**: .in files with ThePEG syntax
+- **Output**: HepMC, LHEF
+
+### MadGraph
+- **Website**: [https://launchpad.net/mg5amcnlo](https://launchpad.net/mg5amcnlo)
+- **Description**: Matrix element generator
+- **Input**: Process definitions in custom syntax
+- **Output**: LHEF events, ROOT, HepMC
+- **DSL**: Process specification language
+
+### Sherpa
+- **Website**: [https://sherpa-team.gitlab.io/](https://sherpa-team.gitlab.io/)
+- **Input**: YAML configuration files
+- **Output**: HepMC, ROOT
+
+## Detector Simulation
+
+### Geant4
+- **Website**: [https://geant4.web.cern.ch/](https://geant4.web.cern.ch/)
+- **Description**: Toolkit for particle physics detector simulation
+- **Input Formats**:
+  - GDML (XML geometry description)
+  - Macro files (.mac)
+  - C++ geometry construction
+- **Output**: ROOT, HDF5, ASCII
+- **Physics Lists**: Modular physics models
+
+### GDML (Geometry Description Markup Language)
+- **Website**: [https://gdml.web.cern.ch/GDML/](https://gdml.web.cern.ch/GDML/)
+- **Format**: XML-based
+- **Use Cases**: 
+  - Detector geometry for Geant4
+  - Visualization
+  - Interchange between simulation frameworks
+- **Elements**: Materials, solids, volumes, placement
+
+### DD4hep (Detector Description for HEP)
+- **Repository**: [https://github.com/AIDASoft/DD4hep](https://github.com/AIDASoft/DD4hep)
+- **Description**: Generic detector description toolkit
+- **Format**: XML or C++ compact files
+- **Backend**: Geant4, ROOT geometry
+- **Use Cases**: Future collider detector studies
+
+## Fast Simulation
+
+### Delphes
+- **Website**: [https://cp3.irmp.ucl.ac.be/projects/delphes](https://cp3.irmp.ucl.ac.be/projects/delphes)
+- **Description**: Fast detector simulation framework
+- **Input**: 
+  - HepMC, LHEF, ROOT
+  - Configuration cards (Tcl-based)
+- **Output**: ROOT files with reconstructed objects
+- **Use Cases**: Phenomenology studies, detector optimization
+
+### Parametric Simulation
+- Various experiments have custom fast simulation
+- Configuration: Often text-based parameter files
+- Output: Same format as full simulation (ROOT)
+
+## Analysis Frameworks
+
+### RDataFrame (ROOT)
+- **Description**: High-level interface for data analysis in ROOT
+- **Language**: C++, Python
+- **Features**: 
+  - Declarative analysis
+  - Automatic parallelization
+  - Lazy evaluation
+
+### Scikit-HEP
+- **Website**: [https://scikit-hep.org/](https://scikit-hep.org/)
+- **Description**: Python ecosystem for HEP
+- **Key Packages**:
+  - uproot (ROOT I/O)
+  - awkward (jagged arrays)
+  - hist (histogramming)
+  - vector (Lorentz vectors)
+  - particle (PDG particle data)
+
+### Coffea (Column Object Framework For Effective Analysis)
+- **Repository**: [https://github.com/CoffeaTeam/coffea](https://github.com/CoffeaTeam/coffea)
+- **Description**: Python-based analysis framework
+- **Backend**: Awkward Array, Dask for scaling
+- **Input**: ROOT files via uproot
+
+## Theoretical Calculation Formats
+
+### SLHA (SUSY Les Houches Accord)
+- **Description**: Format for SUSY model parameters
+- **Format**: ASCII with blocks and values
+- **Use Cases**: 
+  - Spectrum calculators → Event generators
+  - Experimental limit interpretation
+- **Versions**: SLHA1, SLHA2
+
+### UFO (Universal FeynRules Output)
+- **Description**: Model format for MC generators
+- **Format**: Python modules
+- **Use Cases**: BSM physics models in generators
+- **Tools**: FeynRules, MadGraph
+
+### CalcHEP/CompHEP
+- **Description**: Symbolic calculation programs
+- **Format**: Custom model files
+- **Output**: Cross sections, decay widths
+
+## Parton Distribution Functions
+
+### LHAPDF (Les Houches Accord PDF)
+- **Website**: [https://lhapdf.hepforge.org/](https://lhapdf.hepforge.org/)
+- **Description**: Standard library for PDF access
+- **Format**: Grid files (text-based)
+- **PDF Sets**: CT18, MSHT20, NNPDF4.0, etc.
+- **Language Support**: C++, Python, Fortran
+
+## Reconstruction and Trigger
+
+### Trigger Configuration
+- **Formats**: XML, JSON, Python
+- **Examples**: 
+  - ATLAS: XML
+  - CMS: Python configuration
+- **Contents**: Trigger logic, thresholds, prescales
+
+### Calibration Data
+- **Formats**: Database systems (Oracle, SQLite)
+- **Contents**: 
+  - Detector conditions
+  - Calibration constants
+  - Alignment parameters
+- **Access**: Conditions database interfaces
+
+## Data Preservation
+
+### REANA (Reusable Analyses)
+- **Website**: [http://www.reanahub.io/](http://www.reanahub.io/)
+- **Description**: Platform for reproducible research
+- **Format**: YAML workflow specification
+- **Use Cases**: Preserving analysis workflows
+
+### HEPData
+- **Website**: [https://www.hepdata.net/](https://www.hepdata.net/)
+- **Description**: Repository for HEP experimental results
+- **Format**: YAML data tables
+- **Contents**: 
+  - Cross sections
+  - Limits
+  - Distributions from publications
+
+### INSPIRE-HEP
+- **Website**: [https://inspirehep.net/](https://inspirehep.net/)
+- **Description**: Digital library for HEP
+- **Integration**: Links to HEPData, arXiv, experiments
+
+## Control and Configuration Languages
+
+### CMS Configuration (Python)
+- **Description**: Python-based configuration framework
+- **Features**: 
+  - Object-oriented configuration
+  - Module composition
+  - Parameter sets
+
+### ATLAS JO (Job Options)
+- **Language**: Python
+- **Use Cases**: 
+  - Athena framework configuration
+  - Job steering
+  - Algorithm sequencing
+
+### Gaudi Framework
+- **Description**: Event processing framework
+- **Configuration**: Python
+- **Used by**: LHCb, ATLAS (Athena)
+
+## Machine Learning Integration
+
+### Model Formats
+- **ONNX**: [https://onnx.ai/](https://onnx.ai/)
+  - Interoperable ML model format
+  - Used in trigger systems, reconstruction
+- **SavedModel** (TensorFlow)
+- **TorchScript** (PyTorch)
+
+### Training Data
+- **Formats**: HDF5, ROOT, Parquet
+- **Tools**: TensorFlow, PyTorch data loaders
+- **Preprocessing**: Often custom per experiment
+
+## Workflow Management
+
+### PanDA (Production and Distributed Analysis)
+- **Used by**: ATLAS
+- **Configuration**: JSON, Python
+- **Task definition**: Custom formats
+
+### DIRAC (Distributed Infrastructure with Remote Agent Control)
+- **Used by**: LHCb, Belle II, others
+- **Configuration**: Python, XML
+
+### HTCondor
+- **Configuration**: ClassAds (custom syntax)
+- **Job description**: Submit files
+
+## Best Practices
+
+1. **Use ROOT** for event data storage (standard in HEP)
+2. **Use HepMC3** for event generator interfaces
+3. **Use GDML** for geometry interchange
+4. **Document** all Monte Carlo settings
+5. **Preserve** analysis code with data (REANA, Git)
+6. **Publish** final results to HEPData
+7. **Use standard formats** (LHEF, SLHA) for model interchange
+8. **Version** data formats and software
+9. **Archive** complete analysis chains
+
+## Related Resources
+
+- [Hadron Physics Formats](hadron-physics.qmd)
+- [Nuclear Physics Formats](nuclear-physics.qmd)
+- [Neutrino Physics Formats](neutrino-physics.qmd)
+- [Serialization Formats Overview](serialization-formats.qmd)
+
+## External Links
+
+- [HEP Software Foundation](https://hepsoftwarefoundation.org/)
+- [CERN Computing](https://computing.web.cern.ch/)
+- [Scikit-HEP](https://scikit-hep.org/)
+- [ROOT Forum](https://root-forum.cern.ch/)
+- [HEPData](https://www.hepdata.net/)

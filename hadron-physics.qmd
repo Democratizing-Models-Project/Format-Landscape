@@ -1,0 +1,183 @@
+---
+title: "Hadron Physics Formats"
+---
+
+# Hadron Physics: Formats and DSLs
+
+Hadron physics studies the structure and interactions of hadrons (particles made of quarks). This field bridges nuclear and particle physics, requiring specialized formats for experimental data, theoretical calculations, and simulations.
+
+## Experimental Data Formats
+
+### ROOT (CERN Data Analysis Framework)
+- **Website**: [https://root.cern.ch/](https://root.cern.ch/)
+- **Description**: Primary format for hadron physics experiments
+- **Use Cases**: 
+  - Event data from experiments (JLab, MAMI, ELSA, etc.)
+  - Histogram storage
+  - Analysis results
+- **Key Features**: TTrees, histograms, fitting capabilities
+
+### HIPO (High Performance Output)
+- **Repository**: [https://github.com/gavalian/hipo](https://github.com/gavalian/hipo)
+- **Description**: Binary format developed for CLAS12 at Jefferson Lab
+- **Use Cases**: Fast event data storage and streaming
+- **Language Support**: C++, Java, Python
+- **Key Features**:
+  - Schema-based binary format
+  - High-performance I/O
+  - Compact storage
+
+### CODA (CEBAF Online Data Acquisition)
+- **Description**: Data acquisition format for Jefferson Lab experiments
+- **Format Type**: Binary event format
+- **Use Cases**: Raw experimental data from detectors
+- **Tools**: ET system, CODA components
+
+## Theoretical Calculation Formats
+
+### Partial Wave Analysis Formats
+
+#### AmpTools
+- **Repository**: [https://github.com/mashephe/AmpTools](https://github.com/mashephe/AmpTools)
+- **Description**: Framework for amplitude analysis
+- **Input Format**: Configuration files (plain text)
+- **Data Format**: ROOT files for data and Monte Carlo
+- **DSL**: Custom configuration syntax for defining amplitudes
+
+#### SAID (Scattering Analysis Interactive Dial-in)
+- **Website**: [https://gwdac.phys.gwu.edu/](https://gwdac.phys.gwu.edu/)
+- **Description**: Database and analysis tool for hadron scattering
+- **Data Format**: Custom ASCII format for partial waves
+- **Output**: Tables of partial wave amplitudes
+
+#### PWA (Partial Wave Analysis) formats
+- Various experiments use custom formats
+- Common elements: energy, angles, cross sections, asymmetries
+- Often ASCII or CSV for exchange
+
+### Form Factor Data
+
+#### World databases
+- Various groups maintain databases of form factor measurements
+- Formats: ASCII tables, ROOT files, JSON
+- Examples:
+  - Proton/neutron form factors
+  - Pion/kaon form factors
+  - Transition form factors
+
+## Monte Carlo Event Generators
+
+### PYTHIA Event Format
+- **Website**: [https://www.pythia.org/](https://www.pythia.org/)
+- **Description**: General-purpose event generator
+- **Output Formats**: 
+  - HepMC (event record standard)
+  - LHEF (Les Houches Event Format)
+  - Custom ASCII
+
+### HERWIG
+- **Website**: [https://herwig.hepforge.org/](https://herwig.hepforge.org/)
+- **Output Formats**: HepMC, LHEF
+- **Use Cases**: Hadronization modeling
+
+### HepMC (High Energy Physics Monte Carlo)
+- **Website**: [http://hepmc.web.cern.ch/](http://hepmc.web.cern.ch/)
+- **Description**: Standard event record for Monte Carlo generators
+- **Format**: C++ object structure, ASCII/binary I/O
+- **Version**: HepMC3 is current standard
+
+## Parton Distribution Functions (PDFs)
+
+### LHAPDF (Les Houches Accord PDF)
+- **Website**: [https://lhapdf.hepforge.org/](https://lhapdf.hepforge.org/)
+- **Description**: Standard library for PDF access
+- **Format**: Grid files (plain text)
+- **Use Cases**: Providing PDF sets to Monte Carlo generators and calculations
+- **PDF Sets**: CT, MMHT, NNPDF, etc.
+
+### PDF Grid Formats
+- Plain text grid files
+- Interpolation data for x, Q² dependence
+- Metadata: PDF name, order, flavors
+
+## Geant4 Detector Simulation
+
+### GDML (Geometry Description Markup Language)
+- **Website**: [https://gdml.web.cern.ch/GDML/](https://gdml.web.cern.ch/GDML/)
+- **Format**: XML-based geometry description
+- **Use Cases**: Detector geometry for hadron physics experiments
+- **Key Features**: Materials, volumes, placement, visualization
+
+### Geant4 Output
+- **Formats**: ROOT, HDF5, ASCII
+- **Contents**: Particle tracks, energy deposits, hits
+- **Integration**: Often feeds into reconstruction chains
+
+## Analysis Frameworks
+
+### JANA2 (JLab ANAlysis framework)
+- **Repository**: [https://github.com/JeffersonLab/JANA2](https://github.com/JeffersonLab/JANA2)
+- **Description**: Multi-threaded event processing framework
+- **Input**: HIPO, EVIO formats
+- **Output**: ROOT, custom formats
+
+### CLAS12 Analysis Tools
+- Based on JANA2 and HIPO
+- Configuration: YAML, CCDB (calibration database)
+- Output: ROOT, HDF5
+
+## Databases and Archives
+
+### Jefferson Lab Data Archive
+- Stores experimental data from Hall A, B, C, D
+- Formats: EVIO, HIPO, ROOT
+- Access: Tape archives, online catalogs
+
+### Particle Data Group (PDG)
+- **Website**: [https://pdg.lbl.gov/](https://pdg.lbl.gov/)
+- **Description**: Repository of particle properties
+- **Formats**: 
+  - Online database
+  - ASCII data files
+  - Machine-readable formats
+
+### Durham HepData
+- **Website**: [https://www.hepdata.net/](https://www.hepdata.net/)
+- **Description**: Repository for experimental results
+- **Format**: YAML-based data tables
+- **Use Cases**: Publishing and archiving experimental measurements
+
+## Domain-Specific Languages
+
+### Reaction Definition Languages
+- GlueX: Reaction filter syntax
+- CLAS12: Particle combination specifications
+- Used for event selection and filtering
+
+### Amplitude Specification
+- AmpTools configuration language
+- Defines: waves, resonances, couplings
+- Example syntax for amplitude models
+
+## Best Practices
+
+1. **Use ROOT** for general experimental data
+2. **Use HIPO** for high-rate experiments (if applicable)
+3. **Document detector geometry** in GDML
+4. **Archive raw data** with full metadata
+5. **Use HepData** for publishing results
+6. **Follow LHAPDF** standards for PDFs
+7. **Use HepMC** for event generator output
+
+## Related Resources
+
+- [Particle Physics Formats](particle-physics.qmd)
+- [Nuclear Physics Formats](nuclear-physics.qmd)
+- [Lattice Physics Formats](lattice-physics.qmd)
+- [Serialization Formats Overview](serialization-formats.qmd)
+
+## External Links
+
+- [Jefferson Lab Software](https://www.jlab.org/software)
+- [GlueX Software](https://halld.jlab.org/software/)
+- [CLAS12 Software](https://clasweb.jlab.org/wiki/index.php/CLAS12_Software)

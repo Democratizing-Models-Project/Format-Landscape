@@ -1,0 +1,280 @@
+---
+title: "Laser Physics Formats"
+---
+
+# Laser Physics: Formats and DSLs
+
+Laser physics, including laser-plasma interactions, high-field physics, and ultrafast phenomena, involves complex simulations and experimental diagnostics. This page covers formats and DSLs used in this domain.
+
+## Particle-in-Cell (PIC) Simulation Formats
+
+### EPOCH
+- **Repository**: [https://github.com/Warwick-Plasma/epoch](https://github.com/Warwick-Plasma/epoch)
+- **Description**: Extensible PIC Open Collaboration
+- **Input Format**: Fortran-style deck files
+- **Output Format**: SDF (Self-Describing Format)
+- **Key Features**:
+  - Custom DSL for physics setup
+  - Laser pulse specifications
+  - Species definitions
+  - Boundary conditions
+
+### SDF (Self-Describing Format)
+- **Description**: Binary format used by EPOCH
+- **Features**:
+  - Self-describing metadata
+  - Efficient storage of fields and particles
+- **Tools**: 
+  - Python readers (sdf module)
+  - VisIt plugin
+  - Custom analysis scripts
+
+### WarpX
+- **Repository**: [https://github.com/ECP-WarpX/WarpX](https://github.com/ECP-WarpX/WarpX)
+- **Description**: Advanced electromagnetic PIC code
+- **Input Format**: Text-based input files (AMReX style)
+- **Output Format**: 
+  - HDF5 (via openPMD)
+  - PlotFiles (AMReX format)
+- **Key Features**: Adaptive mesh refinement
+
+### openPMD (Open Standard for Particle-Mesh Data)
+- **Website**: [https://www.openpmd.org/](https://www.openpmd.org/)
+- **Description**: Standard for PIC simulation output
+- **Format**: HDF5 or ADIOS2 backend
+- **Support**: WarpX, PIConGPU, FBPIC
+- **Key Features**:
+  - Metadata conventions
+  - Particle and field data
+  - Time series support
+  - Interoperability between codes
+
+### PIConGPU
+- **Repository**: [https://github.com/ComputationalRadiationPhysics/picongpu](https://github.com/ComputationalRadiationPhysics/picongpu)
+- **Description**: GPU-accelerated PIC code
+- **Input**: Configuration via C++ templates and .cfg files
+- **Output**: openPMD (HDF5), ADIOS
+- **DSL**: Template metaprogramming for physics modules
+
+### OSIRIS
+- **Website**: [https://osiris-code.github.io/](https://osiris-code.github.io/)
+- **Description**: PIC framework for plasma physics
+- **Input Format**: Fortran namelist-style input
+- **Output Format**: HDF5
+- **Visualization**: VisXD, custom tools
+
+### SMILEI
+- **Website**: [https://smileipic.github.io/Smilei/](https://smileipic.github.io/Smilei/)
+- **Description**: PIC code for plasma physics
+- **Input Format**: Python-based input files
+- **Output Format**: HDF5
+- **Key Features**: Python DSL for setup
+
+## Laser Pulse Representation
+
+### Laser Pulse Parameters
+Common parameters stored in simulations:
+- Wavelength (λ)
+- Intensity (a₀ or I)
+- Pulse duration (τ)
+- Focal spot size (w₀)
+- Polarization
+- Temporal profile (Gaussian, flat-top, etc.)
+- Spatial profile (Gaussian, super-Gaussian, etc.)
+
+### Complex Pulse Formats
+- **Files**: ASCII, HDF5, or custom binary
+- **Contents**: 
+  - Spatiotemporal field profiles
+  - Phase information
+  - Spectral content
+- **Tools**: Laser design software, FFT analysis
+
+## Ray Tracing and Propagation
+
+### Zemax
+- **Description**: Commercial optical design software
+- **Format**: Proprietary .zmx files
+- **Export**: Various formats (ASCII, MATLAB)
+- **Use Cases**: Laser beam line design
+
+### FRED (Photon Engineering)
+- **Description**: Optical engineering software
+- **Format**: Proprietary
+- **Use Cases**: Ray tracing, illumination
+
+### BeamProp/RSoft
+- **Description**: Beam propagation software
+- **Format**: Proprietary input/output
+- **Use Cases**: Waveguide design, laser propagation
+
+## Diagnostics and Experimental Data
+
+### Oscilloscope Data
+- **Formats**: 
+  - CSV (common export)
+  - Binary (manufacturer-specific: Tektronix, LeCroy, etc.)
+  - HDF5 (some modern scopes)
+- **Tools**: PyVISA, manufacturer SDKs
+
+### Camera/Detector Data
+- **Formats**:
+  - TIFF (16-bit, 32-bit for intensity)
+  - HDF5 for scientific cameras
+  - Manufacturer formats (e.g., .spe for Princeton Instruments)
+- **Metadata**: Exposure time, gain, timestamp
+
+### Spectrometer Data
+- **Formats**: ASCII, CSV, manufacturer binary
+- **Contents**: Wavelength vs. intensity
+- **Calibration**: Wavelength calibration data
+
+### Particle Diagnostics
+- **Thomson Parabola**: Image files + analysis
+- **Particle Spectrometers**: Energy vs. count data
+- **Format**: Often custom ASCII or ROOT
+
+## Laser Amplifier Modeling
+
+### MIRO/MIRÓ
+- **Description**: Laser amplifier modeling
+- **Format**: Custom input files
+- **Use Cases**: Amplifier chain design
+
+### Laser Pulse Modeling Tools
+- Various in-house codes
+- Input: Pulse parameters, material properties
+- Output: Amplified pulse characteristics
+
+## Plasma Diagnostics Formats
+
+### Interferometry/Shadowgraphy
+- **Data**: Image sequences (TIFF, HDF5)
+- **Analysis**: Phase maps, density profiles
+- **Output**: Density maps (2D arrays, often HDF5)
+
+### X-ray Spectroscopy
+- **Format**: Similar to general spectroscopy
+- **Special**: Energy calibration for X-ray range
+
+### Proton Radiography
+- **Data**: Image stacks
+- **Analysis**: Field reconstruction algorithms
+- **Output**: E and B field maps
+
+## Theoretical Calculation Formats
+
+### Atomic Physics Calculations
+- **FLYCHK**: Plasma atomic physics
+  - Input: ASCII parameter files
+  - Output: ASCII tables
+- **PrismSPECT**: Spectroscopic modeling
+  - Proprietary formats
+
+### QED Cascade Simulations
+- **Formats**: Often custom for each code
+- **Outputs**: Particle phase space, photon spectra
+- **Common**: HDF5 for large datasets
+
+## High-Performance Computing Output
+
+### ADIOS2
+- **Website**: [https://adios2.readthedocs.io/](https://adios2.readthedocs.io/)
+- **Description**: Adaptable I/O System
+- **Use Cases**: 
+  - Large-scale parallel I/O
+  - Streaming data
+  - In-situ visualization
+- **Backend**: Can write to HDF5, binary, etc.
+- **Used by**: WarpX, other HPC codes
+
+### Parallel I/O Patterns
+- **MPI-IO**: Low-level parallel file access
+- **HDF5 Parallel**: HDF5 with MPI
+- **Libraries**: ADIOS2, PnetCDF
+
+## Visualization Tools and Formats
+
+### VisIt
+- **Website**: [https://visit-dav.github.io/visit-website/](https://visit-dav.github.io/visit-website/)
+- **Supported Formats**: 
+  - HDF5, NetCDF
+  - SDF (EPOCH)
+  - openPMD
+  - VTK
+- **Use Cases**: Large-scale 3D visualization
+
+### ParaView
+- **Website**: [https://www.paraview.org/](https://www.paraview.org/)
+- **Supported Formats**: 
+  - VTK, HDF5, XDMF
+  - Custom readers via plugins
+- **Use Cases**: Interactive 3D visualization
+
+### VTK (Visualization Toolkit)
+- **Format**: XML-based or legacy ASCII/binary
+- **Use Cases**: Structured/unstructured grid visualization
+- **Converters**: Available for many simulation formats
+
+## Domain-Specific Languages
+
+### EPOCH Input Deck Language
+```
+begin:laser
+  boundary = x_min
+  intensity_w_cm2 = 1.0e18
+  lambda = 0.8 * micron
+  profile = gauss(y,0,4*micron)
+  ...
+end:laser
+```
+
+### WarpX Input File Syntax
+```
+max_step = 1000
+amr.n_cell = 128 128 256
+particles.species_names = electrons ions
+electrons.charge = -q_e
+...
+```
+
+### Python-based DSLs
+- SMILEI uses Python for input
+- Allows programmatic setup
+- Access to full Python capabilities
+
+## Analysis and Post-Processing
+
+### Custom Python/MATLAB Scripts
+- Read HDF5, SDF, or other formats
+- Analysis pipelines
+- Common libraries: h5py, numpy, scipy, matplotlib
+
+### Jupyter Notebooks
+- Interactive analysis
+- Documentation + code + results
+- Reproducible workflows
+
+## Best Practices
+
+1. **Use openPMD** for PIC simulation output when possible
+2. **Store metadata** comprehensively (laser parameters, plasma conditions)
+3. **Use HDF5** for large datasets
+4. **Version control** input files and analysis scripts
+5. **Document** simulation parameters thoroughly
+6. **Archive raw data** before processing
+7. **Use standard visualization formats** (VTK, HDF5) for sharing
+8. **Include units** explicitly in data files
+
+## Related Resources
+
+- [Particle Physics Formats](particle-physics.qmd)
+- [Serialization Formats Overview](serialization-formats.qmd)
+
+## External Links
+
+- [openPMD Standard](https://github.com/openPMD/openPMD-standard)
+- [EPOCH Code](https://cfsa-pmw.warwick.ac.uk/EPOCH/epoch)
+- [WarpX Documentation](https://warpx.readthedocs.io/)
+- [PIConGPU Documentation](https://picongpu.readthedocs.io/)
+- [OSIRIS Framework](https://github.com/osiris-code/osiris)

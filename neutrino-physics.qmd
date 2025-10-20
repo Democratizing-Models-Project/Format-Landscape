@@ -1,0 +1,355 @@
+---
+title: "Neutrino Physics Formats"
+---
+
+# Neutrino Physics: Formats and DSLs
+
+Neutrino physics experiments and simulations span a wide range of energy scales and detector technologies, from reactor neutrinos to high-energy atmospheric and accelerator neutrinos. This page covers the data formats and tools specific to neutrino physics.
+
+## Experimental Data Formats
+
+### ROOT-based Formats
+- **Description**: Most neutrino experiments use ROOT for data storage
+- **Experiments**: 
+  - T2K, NOvA, MicroBooNE, DUNE
+  - Super-Kamiokande, Hyper-Kamiokande
+  - IceCube (partial)
+- **Contents**: 
+  - Raw waveforms
+  - Reconstructed events
+  - Calibration data
+  - Monte Carlo truth
+
+### I3 (IceCube Format)
+- **Description**: Custom format for IceCube experiment
+- **Format**: Serialized C++ objects (Boost serialization)
+- **File Extension**: .i3
+- **Tools**: IceTray framework
+- **Python Support**: icecube Python modules
+
+### WCSim Output
+- **Description**: Water Cherenkov Simulator
+- **Format**: ROOT files
+- **Contents**: 
+  - PMT hits
+  - True particle information
+  - Detector geometry
+- **Used by**: Super-K, Hyper-K, WATCHMAN studies
+
+## Event Generators for Neutrinos
+
+### GENIE (Generates Events for Neutrino Interaction Experiments)
+- **Website**: [https://www.genie-mc.org/](https://www.genie-mc.org/)
+- **Description**: Comprehensive neutrino event generator
+- **Input Format**: XML configuration files
+- **Output Formats**: 
+  - GHEP (GENIE native format in ROOT)
+  - NUISANCE format
+  - ROOT TTree
+- **Key Features**: 
+  - Cross section models
+  - Nuclear effects
+  - Hadronization
+
+### NuWro
+- **Website**: [https://nuwro.github.io/user-guide/](https://nuwro.github.io/user-guide/)
+- **Description**: Neutrino event generator
+- **Input Format**: Parameter files (params.txt)
+- **Output Format**: ROOT files
+- **Features**: Lepton-nucleus scattering
+
+### NEUT
+- **Description**: Neutrino event generator (used by T2K, Super-K)
+- **Input Format**: Card file configuration
+- **Output Format**: ROOT files
+- **Status**: Limited public distribution
+
+### GiBUU
+- **Website**: [https://gibuu.hepforge.org/](https://gibuu.hepforge.org/)
+- **Description**: Transport model for nuclear reactions
+- **Input Format**: Fortran namelists (JobCard)
+- **Output Format**: Binary and ASCII
+- **Use Cases**: Neutrino-nucleus interactions, heavy-ion collisions
+
+### NuSTEC Formats
+- **Description**: Neutrino Scattering Theory Experiment Collaboration
+- **Data Format**: Standardized data tables
+- **Use Cases**: Generator validation, cross section archives
+
+## Detector Simulation
+
+### Geant4-based Simulations
+- **Framework**: Most experiments use Geant4
+- **Input**: 
+  - GDML for geometry
+  - Macro files for configuration
+- **Output**: ROOT files with hits, tracks, energy deposits
+
+### LArSoft (Liquid Argon Software)
+- **Website**: [https://larsoft.org/](https://larsoft.org/)
+- **Description**: Common framework for LAr TPC experiments
+- **Format**: art ROOT files
+- **Experiments**: MicroBooNE, SBND, ICARUS, DUNE
+- **Key Features**: 
+  - Modular simulation and reconstruction
+  - Common data products
+  - Gallery for lightweight analysis
+
+### art Framework
+- **Description**: Event processing framework (Fermilab)
+- **Format**: art ROOT files
+- **Features**: 
+  - Data products
+  - Module system
+  - Provenance tracking
+- **Used by**: NOvA, MicroBooNE, DUNE, Mu2e
+
+### RAT (Reactor Analysis Tool)
+- **Repository**: [https://github.com/rat-pac/rat-pac](https://github.com/rat-pac/rat-pac)
+- **Description**: Simulation and analysis for reactor and solar neutrinos
+- **Input**: JSON-like configuration
+- **Output**: ROOT files
+- **Used by**: SNO+, KamLAND studies
+
+### WCSim
+- **Description**: Geant4-based Water Cherenkov simulation
+- **Configuration**: Macro files
+- **Output**: ROOT with custom hit classes
+- **Used by**: Super-K, Hyper-K, T2K
+
+## Reconstruction Frameworks
+
+### LArSoft Reconstruction
+- **Data Products**: 
+  - Hits (ADC signals)
+  - Clusters
+  - Tracks and showers
+  - Vertices
+  - Particle IDs
+- **Format**: art event data model
+
+### Pandora
+- **Description**: Pattern recognition toolkit
+- **Used by**: LAr TPC experiments (via LArPandora)
+- **Format**: Internal XML-based event representation
+- **Output**: Reconstructed particles in experiment format
+
+### IceTray (IceCube)
+- **Description**: Modular event processing framework
+- **Configuration**: Python scripts
+- **Data Model**: I3 frames with physics objects
+- **Modules**: C++ modules configured via Python
+
+## Cross Section Data
+
+### NUISANCE (Neutrino Interaction validation using Sparse Conditioning Events)
+- **Repository**: [https://github.com/NUISANCEMC/nuisance](https://github.com/NUISANCEMC/nuisance)
+- **Description**: Cross section validation framework
+- **Input**: ROOT files from generators
+- **Data Format**: XML specification of experiments
+- **Use Cases**: 
+  - Generator tuning
+  - Systematic studies
+  - Model comparison
+
+### NuSTEC Database
+- **Format**: Various (ROOT, ASCII, HepData YAML)
+- **Contents**: Experimental cross section measurements
+- **Access**: Web interface, data downloads
+
+## Oscillation Analysis
+
+### GLoBES (General Long Baseline Experiment Simulator)
+- **Website**: [https://www.mpi-hd.mpg.de/personalhomes/globes/](https://www.mpi-hd.mpg.de/personalhomes/globes/)
+- **Input Format**: AEDL (Abstract Experiment Definition Language)
+- **Use Cases**: 
+  - Experiment sensitivity studies
+  - Oscillation parameter fits
+- **Output**: ASCII tables, ROOT compatible
+
+### AEDL (Abstract Experiment Definition Language)
+- **Description**: DSL for defining neutrino experiments in GLoBES
+- **Syntax**: Custom text-based format
+- **Elements**: 
+  - Beam fluxes
+  - Cross sections
+  - Detector responses
+  - Systematics
+
+### Oscillation Fitting Tools
+- Various experiments use custom tools
+- Common: MINUIT-based fitters
+- Output: ROOT files with fit results, contours
+
+## Flux Predictions
+
+### Neutrino Beam Simulation
+- **Tools**: 
+  - FLUKA (hadronic interactions)
+  - Geant4 (beam line and target)
+  - Custom focusing horn simulations
+- **Format**: 
+  - ROOT histograms (energy, angle bins)
+  - dk2nu format (common flux format)
+
+### dk2nu Format
+- **Description**: Common format for neutrino flux files
+- **Format**: ROOT TTree
+- **Contents**: 
+  - Parent particle information
+  - Decay kinematics
+  - Weight information
+- **Used by**: Multiple experiments (T2K, NOvA, DUNE)
+
+### Atmospheric Neutrino Fluxes
+- **Formats**: ASCII tables, ROOT
+- **Calculators**: 
+  - FLUKA, CORSIKA
+  - Honda flux, Bartol flux
+- **Contents**: Flux vs. energy, zenith angle
+
+## Calibration and Conditions Data
+
+### Database Systems
+- **Formats**: 
+  - PostgreSQL, SQLite
+  - ROOT files
+  - JSON, XML
+- **Contents**: 
+  - PMT calibrations
+  - Electronics calibrations
+  - Detector conditions
+  - Alignment
+
+### Calibration Constants
+- Often stored per run, per channel
+- Versioning systems
+- Access via framework-specific interfaces
+
+## Machine Learning in Neutrino Physics
+
+### Training Data Formats
+- **Primary**: ROOT files with TTrees
+- **Modern**: HDF5, Parquet for ML pipelines
+- **Tools**: 
+  - uproot for ROOT → NumPy/Pandas
+  - TensorFlow/PyTorch data loaders
+
+### Model Deployment
+- **Formats**: ONNX, SavedModel, TorchScript
+- **Integration**: Within reconstruction frameworks
+- **Examples**: 
+  - Event classification
+  - Energy reconstruction
+  - Particle ID
+
+## Analysis Frameworks and Tools
+
+### CAFAna (Common Analysis Format and Algorithms)
+- **Used by**: NOvA, DUNE
+- **Format**: CAF (Common Analysis Format) ROOT files
+- **Features**: 
+  - Standardized variable names
+  - Spectrum manipulation
+  - Oscillation fits
+
+### MaCh3 (MCMC Analysis Code Hierachy 3)
+- **Used by**: T2K
+- **Description**: MCMC-based fitting framework
+- **Configuration**: XML, card files
+- **Output**: ROOT files with chains, posteriors
+
+### VALOR (Likelihood Analysis Framework)
+- **Description**: Validation and fitting framework
+- **Format**: Configuration files, ROOT I/O
+
+## Data Preservation and Open Data
+
+### HEPData
+- **Use**: Publishing neutrino cross section measurements
+- **Format**: YAML tables
+
+### Experiment Data Releases
+- **Examples**: 
+  - MicroBooNE open data
+  - IceCube public data
+- **Formats**: ROOT, I3, HDF5
+- **Documentation**: README files, data models
+
+## Specific Experiment Formats
+
+### Super-Kamiokande
+- **Format**: ZEBRA (legacy), ROOT (modern)
+- **Access**: Collaboration-internal formats
+
+### T2K
+- **Format**: ROOT files (oa*, nd280*, sk*)
+- **Software**: nd280Highland, T2K-SK, custom tools
+
+### NOvA
+- **Format**: art ROOT files, CAF files
+- **Tools**: NOvAsoft, CAFAna
+
+### MicroBooNE/DUNE
+- **Format**: art/LArSoft ROOT files
+- **Tools**: LArSoft, Pandora, custom modules
+
+### IceCube
+- **Format**: I3 files
+- **Tools**: IceTray, custom analysis frameworks
+
+## Domain-Specific Languages
+
+### GENIE Configuration XML
+```xml
+<param_set name="Default">
+  <param type="double" name="CKM-Vud"> 0.97428 </param>
+  <param type="bool" name="QEL-CC"> true </param>
+  ...
+</param_set>
+```
+
+### GLoBES AEDL
+```
+/* Define an experiment */
+experiment(#exp_name, flux, cross, detector, smearing);
+```
+
+### LArSoft FHiCL (Fermilab Hierarchical Configuration Language)
+```
+physics: {
+  producers: {
+    pandora: @local::microboone_pandora
+  }
+  analyzers: {
+    myanalyzer: { ... }
+  }
+}
+```
+
+## Best Practices
+
+1. **Use ROOT** for most neutrino physics data
+2. **Document** detector geometry comprehensively
+3. **Validate** generators against world data (NUISANCE)
+4. **Archive** flux predictions with uncertainties
+5. **Use common formats** (dk2nu for flux, GHEP for events)
+6. **Version** calibration databases
+7. **Preserve** complete analysis chains
+8. **Publish** results to HEPData
+9. **Use standardized** oscillation parameter conventions
+
+## Related Resources
+
+- [Particle Physics Formats](particle-physics.qmd)
+- [Nuclear Physics Formats](nuclear-physics.qmd)
+- [Hadron Physics Formats](hadron-physics.qmd)
+- [Serialization Formats Overview](serialization-formats.qmd)
+
+## External Links
+
+- [NuSTEC](https://nustec.fnal.gov/)
+- [GENIE Homepage](https://www.genie-mc.org/)
+- [LArSoft](https://larsoft.org/)
+- [IceCube Software](https://software.icecube.wisc.edu/)
+- [Neutrino Platform (CERN)](https://neutrino-platform.web.cern.ch/)

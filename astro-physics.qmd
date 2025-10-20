@@ -1,0 +1,262 @@
+---
+title: "Astro Physics Formats"
+---
+
+# Astrophysics: Formats and DSLs
+
+Astrophysics and cosmology rely on diverse data formats for observations, simulations, and theoretical calculations. This page covers the landscape of formats used across astronomical and cosmological research.
+
+## Observational Data Formats
+
+### FITS (Flexible Image Transport System)
+- **Website**: [https://fits.gsfc.nasa.gov/](https://fits.gsfc.nasa.gov/)
+- **Description**: The primary standard for astronomical data
+- **Format Type**: Binary with ASCII headers
+- **Use Cases**:
+  - Telescope images
+  - Spectroscopic data
+  - Tables and catalogs
+  - Multi-dimensional data cubes
+- **Key Features**:
+  - Self-describing headers
+  - World Coordinate System (WCS) support
+  - Binary tables and image extensions
+  - Universal astronomy standard
+
+### HDF5 in Astronomy
+- **Use Cases**: 
+  - Large survey data (LSST, SKA)
+  - Simulation outputs
+  - Instrument data
+- **Tools**: h5py, pytables
+- **Examples**: Some radio astronomy correlators, simulation codes
+
+### VOTable (Virtual Observatory Table)
+- **Website**: [https://www.ivoa.net/documents/VOTable/](https://www.ivoa.net/documents/VOTable/)
+- **Format**: XML-based table format
+- **Use Cases**: 
+  - Data exchange in Virtual Observatory
+  - Catalog queries
+  - Cross-matching services
+- **Key Features**: Rich metadata, links to external resources
+
+## Simulation Data Formats
+
+### Gadget/Gadget-2/Gadget-4
+- **Description**: N-body/SPH cosmological simulation code
+- **Format**: Binary snapshot files
+- **Structure**: Header + particle blocks
+- **Tools**: pynbody, yt, custom readers
+- **Use Cases**: Dark matter simulations, galaxy formation
+
+### RAMSES
+- **Website**: [https://www.ics.uzh.ch/~teyssier/ramses/RAMSES.html](https://www.ics.uzh.ch/~teyssier/ramses/RAMSES.html)
+- **Description**: Adaptive mesh refinement code
+- **Format**: Binary AMR files
+- **Output**: Multiple files per snapshot
+- **Tools**: yt, custom readers
+
+### Enzo
+- **Website**: [https://enzo-project.org/](https://enzo-project.org/)
+- **Description**: AMR cosmology simulation code
+- **Format**: HDF5
+- **Tools**: yt (primary analysis tool)
+
+### AREPO
+- **Description**: Moving-mesh cosmological code
+- **Format**: HDF5 (compatible with Gadget)
+- **Use Cases**: IllustrisTNG simulations
+
+### Rockstar Halo Catalogs
+- **Repository**: [https://github.com/jwise77/rockstar](https://github.com/jwise77/rockstar)
+- **Description**: Halo finder output format
+- **Format**: ASCII and binary catalogs
+- **Contents**: Halo properties, merger trees
+
+## Analysis Tools and Formats
+
+### Astropy
+- **Website**: [https://www.astropy.org/](https://www.astropy.org/)
+- **Description**: Core Python library for astronomy
+- **Supported Formats**:
+  - FITS (primary)
+  - ASCII tables (various formats)
+  - VOTable
+  - HDF5
+- **Key Modules**: 
+  - astropy.io.fits
+  - astropy.table
+  - astropy.wcs
+
+### yt (Analysis toolkit)
+- **Website**: [https://yt-project.org/](https://yt-project.org/)
+- **Description**: Analysis and visualization for volumetric data
+- **Supported Formats**:
+  - Gadget, RAMSES, Enzo, AREPO
+  - Athena, FLASH
+  - Generic HDF5, FITS
+
+### TOPCAT (Tool for OPerations on Catalogues And Tables)
+- **Website**: [http://www.star.bris.ac.uk/~mbt/topcat/](http://www.star.bris.ac.uk/~mbt/topcat/)
+- **Description**: Interactive catalog analysis tool
+- **Supported Formats**: FITS, VOTable, CSV, SQL databases
+
+## Catalog and Survey Formats
+
+### SDSS (Sloan Digital Sky Survey)
+- **Formats**: 
+  - FITS images and spectra
+  - FITS binary tables (catalogs)
+  - SQL database (CASJobs)
+- **Access**: SciServer, SDSS data access tools
+
+### Gaia Archive
+- **Format**: VOTable, FITS, CSV
+- **Access**: TAP (Table Access Protocol) queries
+- **Contents**: Astrometry, photometry for billions of stars
+
+### 2MASS, WISE, etc.
+- Standard format: FITS tables
+- Distributed via IPAC, VizieR, CDS
+
+## Coordinate and Reference Systems
+
+### WCS (World Coordinate System)
+- **Standard**: FITS WCS keywords
+- **Purpose**: Map pixel coordinates to sky coordinates
+- **Implementations**: astropy.wcs, wcslib
+
+### SkyCoord Formats
+- **Systems**: ICRS, FK5, Galactic, etc.
+- **Serialization**: String formats (e.g., "12h34m56s +12d34m56s")
+- **Tools**: astropy.coordinates
+
+## Spectroscopic Data
+
+### FITS Spectra
+- 1D spectra: Binary tables or images
+- Multi-object spectra: Extensions per object
+- Data cubes: 3D FITS (wavelength + 2D spatial)
+
+### IRAF Formats
+- .fits spectra with specific headers
+- Legacy but still encountered
+- Tools: pyraf, astropy compatibility
+
+### SpecViz/SpecUtils
+- Modern spectroscopic analysis
+- Input: FITS, ASCII, various observatory formats
+- Output: FITS, ASCII
+
+## Radio Astronomy Specific
+
+### Measurement Sets (CASA)
+- **Format**: Table-based (casa::Table)
+- **Use Cases**: Radio interferometry visibility data
+- **Tools**: CASA (Common Astronomy Software Applications)
+- **Structure**: Multiple tables for visibilities, antenna info, etc.
+
+### UVFITS
+- **Description**: FITS format for UV (visibility) data
+- **Use Cases**: Interferometric data exchange
+- **Compatibility**: Multiple radio astronomy packages
+
+### Miriad/AIPS Formats
+- Legacy radio astronomy formats
+- AIPS: Custom binary format
+- Miriad: Directory-based data sets
+- Conversion tools available to/from FITS
+
+## Gravitational Wave Data
+
+### LIGO/Virgo Data Formats
+- **Primary**: HDF5 (strain data, events)
+- **Access**: GWOSC (Gravitational Wave Open Science Center)
+- **Tools**: gwpy, PyCBC, LALSuite
+- **Contents**: Time series, spectrograms, event parameters
+
+### Frame Files
+- **Description**: LIGO's time-series frame format
+- **Format**: Custom binary
+- **Tools**: lalframe, gwpy
+
+## Cosmological Parameter Files
+
+### CAMB/CLASS
+- **Input**: INI files or Python dictionaries
+- **Output**: ASCII tables of power spectra
+- **Use Cases**: CMB and matter power spectrum calculations
+
+### CosmoMC
+- **Input**: INI parameter files
+- **Output**: Chain files (MCMC chains in ASCII)
+- **Use Cases**: Cosmological parameter inference
+
+### Cobaya
+- **Input**: YAML configuration files
+- **Output**: HDF5 or text chains
+- **Use Cases**: Modern cosmological sampling
+
+## Cosmological Simulation Catalogs
+
+### Halo Occupation Distribution (HOD) Files
+- Typically ASCII or HDF5
+- Contents: Galaxy-halo connection parameters
+
+### Mock Catalogs
+- **Formats**: FITS, HDF5, ASCII
+- **Contents**: Galaxy positions, velocities, properties
+- **Tools**: nbodykit, Corrfunc
+
+## Machine Learning in Astronomy
+
+### LSST Data Products
+- **Format**: Primarily HDF5, some FITS
+- **Butler**: Data access abstraction layer
+- **Schema**: Well-defined data products
+
+### Neural Network Training Sets
+- **Formats**: HDF5, TFRecord, PyTorch tensors
+- **Examples**: Galaxy Zoo (FITS + labels), SDSS (cutouts)
+
+## Domain-Specific Languages
+
+### SAOImage DS9 Region Files
+- **Format**: Text-based region specifications
+- **Use Cases**: Defining analysis regions on images
+- **Syntax**: Shapes (circle, box, polygon) with coordinates
+
+### Astronomical Query Languages
+- **ADQL** (Astronomical Data Query Language): SQL-like for astronomy
+- **TAP** (Table Access Protocol): Web service standard
+- **VO Standards**: Various Virtual Observatory protocols
+
+### Pipeline Definition Languages
+- **LSST**: Python-based pipeline tasks
+- **Astropy Pipelines**: Python workflows
+- **Common Pattern**: Python/YAML for pipeline specification
+
+## Best Practices
+
+1. **Use FITS** as the primary format for images and tables
+2. **Include WCS** information in all image headers
+3. **Document provenance** (processing steps, calibrations)
+4. **Archive data** with comprehensive metadata
+5. **Use Virtual Observatory standards** for data sharing
+6. **Version control** reduction pipelines
+7. **Use HDF5** for large simulation outputs
+8. **Follow IVOA standards** for interoperability
+
+## Related Resources
+
+- [Serialization Formats Overview](serialization-formats.qmd)
+- [Particle Physics Formats](particle-physics.qmd)
+- [Neutrino Physics Formats](neutrino-physics.qmd)
+
+## External Links
+
+- [IVOA (International Virtual Observatory Alliance)](https://www.ivoa.net/)
+- [AAS WorldWide Telescope](http://www.worldwidetelescope.org/)
+- [FITS Support Office](https://fits.gsfc.nasa.gov/)
+- [Astropy Documentation](https://docs.astropy.org/)
+- [yt Project](https://yt-project.org/)

@@ -1,0 +1,43 @@
+/* Custom styles for Format Landscape */
+
+/* Improve link visibility */
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/* Code blocks */
+pre {
+  border-left: 3px solid #2780e3;
+  padding-left: 1em;
+}
+
+/* Make headers stand out */
+h1, h2, h3 {
+  color: #2c3e50;
+}
+
+/* Improve list spacing */
+ul, ol {
+  margin-bottom: 1em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+/* Table styling */
+table {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+/* Footer styling */
+.page-footer {
+  margin-top: 2em;
+  padding-top: 1em;
+  border-top: 1px solid #ddd;
+}
